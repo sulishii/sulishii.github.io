@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人员介绍 - 3DXLab</title>
+  <meta name="description" content="湖南大学设计学院3DX实验室 - 团队成员介绍">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* 导航栏样式 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0.5rem 0;
+    }
+    
+    .navbar-brand {
+      margin-right: 2rem;
+    }
+    
+    .logo-item {
+      padding: 0.5rem 1rem;
+    }
+    
+    .navbar-logo {
+      height: 40px;
+      width: auto;
+    }
+    
+    .navbar-menu {
+      display: flex !important;
+      align-items: center;
+    }
+    
+    .navbar-start {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 1rem 1.5rem !important;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: #3498db !important;
+      background-color: transparent !important;
+    }
+    
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background-color: #3498db;
+    }
+    
+    /* 当前页面链接样式 */
+    .nav-link[href="team.html"] {
+      color: #3498db !important;
+    }
+    
+    .nav-link[href="team.html"]::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background-color: #3498db;
+    }
+    
+    /* 主要内容区域 */
+    .main-content {
+      margin-top: 70px;
+      padding-top: 2rem;
+    }
+    
+    /* 页面标题 */
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    
+    .page-title {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .page-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    /* 内容区域样式 */
+    .content-section {
+      padding: 4rem 0;
+    }
+    
+    .section-title {
+      color: #2c3e50;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    
+    /* 团队成员卡片 */
+    .member-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .member-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .member-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .member-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    
+    .member-title {
+      color: #3498db;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    .member-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .member-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .member-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+    
+    .member-link:hover {
+      background: #3498db;
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    /* 导师特殊样式 */
+    .supervisor-profile {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .supervisor-photo {
+      text-align: center;
+    }
+    
+    .supervisor-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #3498db;
+      box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3);
+    }
+    
+    .supervisor-name {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    
+    .supervisor-position {
+      font-size: 1.3rem;
+      color: #3498db;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    
+    .supervisor-bio {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .supervisor-bio p {
+      margin-bottom: 1rem;
+    }
+    
+    .supervisor-contact {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #f8f9fa;
+      color: #666;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .contact-link:hover {
+      background: #3498db;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    /* 学生卡片样式保持不变 */
+    .supervisor-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .supervisor-card .member-name,
+    .supervisor-card .member-title,
+    .supervisor-card .member-description {
+      color: white;
+    }
+    
+    .supervisor-card .member-avatar {
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .supervisor-card .member-link {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    
+    .supervisor-card .member-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* 学生卡片样式 */
+    .student-group {
+      margin-bottom: 3rem;
+    }
+    
+    .student-group-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 2rem;
+      text-align: left;
+      border-left: 4px solid #3498db;
+      padding-left: 1rem;
+    }
+    
+    .student-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+    
+    .student-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .student-photo {
+      margin-bottom: 1rem;
+    }
+    
+    .student-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #e9ecef;
+    }
+    
+    .student-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 0.3rem;
+    }
+    
+    .student-degree {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+    
+    .student-supervisor {
+      color: #3498db;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    /* 自定义列宽 */
+    .column.is-2-5 {
+      flex: none;
+      width: 20%;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .column.is-2-5 {
+        width: 50%;
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      .column.is-2-5 {
+        width: 100%;
+      }
+    }
+    .recruitment-box {
+      background: #f8f9fa;
+      border: 2px dashed #3498db;
+      border-radius: 15px;
+      padding: 3rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .recruitment-icon {
+      font-size: 4rem;
+      color: #3498db;
+      margin-bottom: 1rem;
+    }
+    
+    .recruitment-title {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    
+    .recruitment-text {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .member-card {
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item logo-item" href="index.html">
+          <img src="static/3DXlab.png" alt="3DXLab Logo" class="navbar-logo">
+        </a>
+      </div>
+
+      <div class="navbar-menu is-active">
+         <div class="navbar-start">
+           <a class="navbar-item nav-link" href="about.html">About Us</a>
+           <a class="navbar-item nav-link" href="team.html">Member</a>
+           <a class="navbar-item nav-link" href="achievements.html">Research</a>
+           <a class="navbar-item nav-link" href="about.html#join">Join</a>
+         </div>
+       </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="main-content">
+    <!-- 页面标题 -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">团队成员</h1>
+        <p class="page-subtitle">认识我们优秀的研究团队</p>
+      </div>
+    </section>
+
+    <!-- 实验室负责人 -->
+    <section class="section content-section">
+      <div class="container">
+        <h2 class="title is-2 section-title">实验室负责人</h2>
+        <div class="supervisor-profile">
+          <div class="columns is-vcentered">
+            <div class="column is-3">
+              <div class="supervisor-photo">
+                <img src="static/3DXlab.png" alt="劳教授" class="supervisor-image">
+              </div>
+            </div>
+            <div class="column is-9">
+              <div class="supervisor-info">
+                <h3 class="supervisor-name">劳奕臻</h3>
+                <p class="supervisor-position">教授 / 实验室负责人</p>
+                <div class="supervisor-bio">
+                  <p>
+                    劳奕臻是湖南大学设计学院教授，3DX实验室负责人。他是湖湘青年英才、长沙市杰出创新青年、华为青年学者。
+                    在计算机视觉、3D重建、人工智能等领域具有丰富的研究经验，发表了多篇高水平学术论文。
+                  </p>
+                  <p>
+                    他的研究兴趣包括3D Gaussian Splatting、神经辐射场、计算机视觉、深度学习等前沿技术领域。
+                    致力于推动3D技术在实际应用中的发展和创新。
+                  </p>
+                </div>
+                <div class="supervisor-contact">
+                  <a href="https://design.hnu.edu.cn/info/1023/8820.htm" target="_blank" class="contact-link">
+                    <i class="fas fa-home"></i>
+                    <span>个人主页</span>
+                  </a>
+                  <a href="mailto:yizhen.lao@hnu.edu.cn" class="contact-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>邮箱联系</span>
+                  </a>
+                  <a href="#" class="contact-link">
+                    <i class="fab fa-google-scholar"></i>
+                    <span>Google Scholar</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学生成员 -->
+    <section class="section" style="background-color: #f8f9fa;">
+      <div class="container">
+        <h2 class="title is-2 section-title">学生成员</h2>
+        
+        <!-- 博士研究生 -->
+        <div class="student-group">
+          <h3 class="student-group-title">博士研究生</h3>
+          <div class="columns is-multiline">
+            <div class="column is-2-5">
+              <div class="student-card">
+                <div class="student-photo">
+                  <img src="static/3DXlab.png" alt="王成博" class="student-image">
+                </div>
+                <div class="student-info">
+                  <h4 class="student-name">王程博</h4>
+                  <p class="student-degree">博士研究生</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="column is-2-5">
+              <div class="student-card">
+                <div class="student-photo">
+                  <img src="static/3DXlab.png" alt="张宇" class="student-image">
+                </div>
+                <div class="student-info">
+                  <h4 class="student-name">张宇</h4>
+                  <p class="student-degree">博士研究生</p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 招聘信息 -->
+    <section class="section content-section">
+      <div class="container">
+        <div class="recruitment-box">
+          <div class="recruitment-icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <h3 class="title is-3 recruitment-title">加入我们</h3>
+          <div class="recruitment-text">
+            <p>
+              我们诚挚欢迎对计算机视觉、人工智能、3D技术或交互设计领域感兴趣的同学加入我们的研究团队！
+            </p>
+            <p>
+              <strong>招聘对象：</strong>本科生、硕士研究生、博士研究生<br>
+              <strong>专业背景：</strong>计算机科学、设计学、数学、自动化等相关专业<br>
+              <strong>研究方向：</strong>计算机视觉、机器学习、3D重建、VR/AR、人机交互等
+            </p>
+          </div>
+          <a href="mailto:contact@3dxlab.com" class="button is-primary is-large">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span>联系我们</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

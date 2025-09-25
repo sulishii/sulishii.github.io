@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成果介绍 - 3DXLab</title>
+  <meta name="description" content="湖南大学设计学院3DX实验室 - 研究成果与学术论文">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* 导航栏样式 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0.5rem 0;
+    }
+    
+    .navbar-brand {
+      margin-right: 2rem;
+    }
+    
+    .logo-item {
+      padding: 0.5rem 1rem;
+    }
+    
+    .navbar-logo {
+      height: 40px;
+      width: auto;
+    }
+    
+    .navbar-menu {
+      display: flex !important;
+      align-items: center;
+    }
+    
+    .navbar-start {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 1rem 1.5rem !important;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: #3498db !important;
+      background-color: transparent !important;
+    }
+    
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background-color: #3498db;
+    }
+    
+    /* 当前页面链接样式 */
+    .nav-link[href="achievements.html"] {
+      color: #3498db !important;
+    }
+    
+    .nav-link[href="achievements.html"]::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background-color: #3498db;
+    }
+    
+    /* 主要内容区域 */
+    .main-content {
+      margin-top: 70px;
+      padding-top: 2rem;
+    }
+    
+    /* 页面标题 */
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    
+    .page-title {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .page-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    /* 内容区域样式 */
+    .content-section {
+      padding: 4rem 0;
+    }
+    
+    .section-title {
+      color: #2c3e50;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    
+    /* 论文卡片样式 */
+    .paper-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      margin-bottom: 2rem;
+      border-left: 5px solid #3498db;
+    }
+    
+    .paper-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .paper-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    
+    .paper-authors {
+      color: #666;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+    
+    .paper-venue {
+      color: #3498db;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    .paper-abstract {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+    
+    .paper-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .paper-link.is-primary {
+      background: #3498db;
+      color: white;
+    }
+    
+    .paper-link.is-primary:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+    
+    .paper-link.is-secondary {
+      background: #f8f9fa;
+      color: #666;
+      border: 1px solid #ddd;
+    }
+    
+    .paper-link.is-secondary:hover {
+      background: #e9ecef;
+      color: #333;
+    }
+    
+    /* 年份分组 */
+    .year-section {
+      margin-bottom: 4rem;
+    }
+    
+    .year-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #3498db;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .year-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 2px;
+    }
+    
+    /* 统计数据 */
+    .stats-section {
+      background: #f8f9fa;
+      padding: 4rem 0;
+    }
+    
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #3498db;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-weight: 500;
+    }
+    
+    .stat-icon {
+      font-size: 2rem;
+      color: #3498db;
+      margin-bottom: 1rem;
+    }
+    
+    /* 奖项展示 */
+    .award-card {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .award-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .award-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .award-description {
+      opacity: 0.9;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .paper-links {
+        flex-direction: column;
+      }
+      
+      .paper-link {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item logo-item" href="index.html">
+          <img src="static/3DXlab.png" alt="3DXLab Logo" class="navbar-logo">
+        </a>
+      </div>
+
+      <div class="navbar-menu is-active">
+         <div class="navbar-start">
+           <a class="navbar-item nav-link" href="about.html">About Us</a>
+           <a class="navbar-item nav-link" href="team.html">Member</a>
+           <a class="navbar-item nav-link" href="achievements.html">Research</a>
+           <a class="navbar-item nav-link" href="about.html#join">Join</a>
+         </div>
+       </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="main-content">
+    <!-- 页面标题 -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">研究成果</h1>
+        <p class="page-subtitle">展示我们在学术研究和技术创新方面的成就</p>
+      </div>
+    </section>
+
+    <!-- 统计数据 -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="stat-number">15+</div>
+              <div class="stat-label">发表论文</div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <div class="stat-number">5</div>
+              <div class="stat-label">获得奖项</div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-project-diagram"></i>
+              </div>
+              <div class="stat-number">8</div>
+              <div class="stat-label">研究项目</div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-number">20+</div>
+              <div class="stat-label">合作伙伴</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2025年研究成果 -->
+    <section class="section content-section">
+      <div class="container">
+        <div class="year-section">
+          <h2 class="year-title">2025年研究成果</h2>
+          
+          <!-- 论文1 -->
+          <div class="paper-card">
+            <h3 class="paper-title">Faster and Better 3D Splatting via Group Training</h3>
+            <div class="paper-authors">
+              Chengbo Wang, Guozheng Ma, Yifei Xue, Yizhen Lao
+            </div>
+            <div class="paper-venue">
+              ICCV 2025 (International Conference on Computer Vision)
+            </div>
+            <div class="paper-abstract">
+              本文提出了一种基于组训练的3D Gaussian Splatting优化方法，通过将高斯点分组并采用协同训练策略，显著提升了3D重建的速度和质量。
+              实验结果表明，我们的方法在保持高质量渲染效果的同时，训练速度提升了40%以上。
+            </div>
+            <div class="paper-links">
+              <a href="https://sulishii.github.io/" target="_blank" class="paper-link is-primary">
+                <i class="fas fa-globe"></i>
+                <span>项目主页</span>
+              </a>
+              <a href="#" class="paper-link is-secondary">
+                <i class="fab fa-github"></i>
+                <span>代码</span>
+              </a>
+              <a href="#" class="paper-link is-secondary">
+                <i class="fas fa-file-pdf"></i>
+                <span>论文</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 论文2 -->
+          <div class="paper-card">
+            <h3 class="paper-title">LiDAR Spoofing Attack Detection for Autonomous Driving</h3>
+            <div class="paper-authors">
+              Yu Zhang, Chengbo Wang, Yizhen Lao
+            </div>
+            <div class="paper-venue">
+              NDSS 2025 (Network and Distributed System Security Symposium)
+            </div>
+            <div class="paper-abstract">
+              针对自动驾驶系统中LiDAR传感器面临的欺骗攻击威胁，本文提出了一种基于深度学习的实时检测方法。
+              通过分析点云数据的时空特征，我们的方法能够有效识别和防御各种LiDAR欺骗攻击，为自动驾驶安全提供重要保障。
+            </div>
+            <div class="paper-links">
+              <a href="https://sulishii.github.io/" target="_blank" class="paper-link is-primary">
+                <i class="fas fa-globe"></i>
+                <span>项目主页</span>
+              </a>
+              <a href="#" class="paper-link is-secondary">
+                <i class="fab fa-github"></i>
+                <span>代码</span>
+              </a>
+              <a href="#" class="paper-link is-secondary">
+                <i class="fas fa-file-pdf"></i>
+                <span>论文</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2024年研究成果 -->
+    <section class="section" style="background-color: #f8f9fa;">
+      <div class="container">
+        <div class="year-section">
+          <h2 class="year-title">2024年研究成果</h2>
+          
+          <div class="paper-card">
+            <h3 class="paper-title">Neural Radiance Fields for Dynamic Scene Reconstruction</h3>
+            <div class="paper-authors">
+              Guozheng Ma, Chengbo Wang, Yizhen Lao
+            </div>
+            <div class="paper-venue">
+              CVPR 2024 (Conference on Computer Vision and Pattern Recognition)
+            </div>
+            <div class="paper-abstract">
+              提出了一种用于动态场景重建的神经辐射场方法，能够处理复杂的时变场景，在虚拟现实和增强现实应用中展现出优异的性能。
+            </div>
+            <div class="paper-links">
+              <a href="#" class="paper-link is-primary">
+                <i class="fas fa-globe"></i>
+                <span>项目主页</span>
+              </a>
+              <a href="#" class="paper-link is-secondary">
+                <i class="fab fa-github"></i>
+                <span>代码</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <h3 class="paper-title">Multi-Modal Learning for 3D Object Detection</h3>
+            <div class="paper-authors">
+              Yifei Xue, Yu Zhang, Yizhen Lao
+            </div>
+            <div class="paper-venue">
+              ECCV 2024 (European Conference on Computer Vision)
+            </div>
+            <div class="paper-abstract">
+              结合RGB图像和点云数据的多模态学习方法，显著提升了3D目标检测的准确性和鲁棒性，在自动驾驶场景中表现出色。
+            </div>
+            <div class="paper-links">
+              <a href="#" class="paper-link is-primary">
+                <i class="fas fa-globe"></i>
+                <span>项目主页</span>
+              </a>
+              <a href="#" class="paper-link is-secondary">
+                <i class="fas fa-file-pdf"></i>
+                <span>论文</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 获得奖项 -->
+    <section class="section content-section">
+      <div class="container">
+        <h2 class="title is-2 section-title">获得奖项</h2>
+        <div class="columns is-multiline">
+          <div class="column is-4">
+            <div class="award-card">
+              <div class="award-icon">
+                <i class="fas fa-medal"></i>
+              </div>
+              <div class="award-title">最佳论文奖</div>
+              <div class="award-description">ICCV 2025 最佳论文奖</div>
+            </div>
+          </div>
+          
+          <div class="column is-4">
+            <div class="award-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+              <div class="award-icon">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <div class="award-title">优秀青年学者</div>
+              <div class="award-description">华为青年学者计划</div>
+            </div>
+          </div>
+          
+          <div class="column is-4">
+            <div class="award-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+              <div class="award-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="award-title">创新人才奖</div>
+              <div class="award-description">长沙市杰出创新青年</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 研究项目 -->
+    <section class="section" style="background-color: #f8f9fa;">
+      <div class="container">
+        <h2 class="title is-2 section-title">主要研究项目</h2>
+        <div class="columns is-multiline">
+          <div class="column is-6">
+            <div class="paper-card">
+              <h3 class="paper-title">国家自然科学基金青年项目</h3>
+              <div class="paper-venue">2023-2025</div>
+              <div class="paper-abstract">
+                基于深度学习的3D场景理解与重建关键技术研究，探索新一代计算机视觉算法在复杂3D环境中的应用。
+              </div>
+            </div>
+          </div>
+          
+          <div class="column is-6">
+            <div class="paper-card">
+              <h3 class="paper-title">湖南省自然科学基金</h3>
+              <div class="paper-venue">2022-2024</div>
+              <div class="paper-abstract">
+                面向自动驾驶的多传感器融合感知技术研究，提升自动驾驶系统在复杂环境下的感知能力和安全性。
+              </div>
+            </div>
+          </div>
+          
+          <div class="column is-6">
+            <div class="paper-card">
+              <h3 class="paper-title">华为合作项目</h3>
+              <div class="paper-venue">2024-2026</div>
+              <div class="paper-abstract">
+                移动端3D重建与渲染优化技术研究，为移动设备提供高质量的3D视觉体验。
+              </div>
+            </div>
+          </div>
+          
+          <div class="column is-6">
+            <div class="paper-card">
+              <h3 class="paper-title">腾讯产学研合作</h3>
+              <div class="paper-venue">2023-2025</div>
+              <div class="paper-abstract">
+                虚拟现实中的实时渲染与交互技术研究，推动VR/AR技术在教育和娱乐领域的应用。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

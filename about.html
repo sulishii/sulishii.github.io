@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们 - 3DXLab</title>
+  <meta name="description" content="湖南大学设计学院3DX实验室 - 关于我们">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* 导航栏样式 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0.5rem 0;
+    }
+    
+    .navbar-brand {
+      margin-right: 2rem;
+    }
+    
+    .logo-item {
+      padding: 0.5rem 1rem;
+    }
+    
+    .navbar-logo {
+      height: 40px;
+      width: auto;
+    }
+    
+    .navbar-menu {
+      display: flex !important;
+      align-items: center;
+    }
+    
+    .navbar-start {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 1rem 1.5rem !important;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: #3498db !important;
+      background-color: transparent !important;
+    }
+    
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background-color: #3498db;
+    }
+    
+    /* 当前页面链接样式 */
+    .nav-link[href="about.html"] {
+      color: #3498db !important;
+    }
+    
+    .nav-link[href="about.html"]::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background-color: #3498db;
+    }
+    
+    /* 主要内容区域 */
+    .main-content {
+      margin-top: 70px;
+      padding-top: 2rem;
+    }
+    
+    /* 页面标题 */
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    
+    .page-title {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .page-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    /* 内容区域样式 */
+    .content-section {
+      padding: 4rem 0;
+    }
+    
+    .section-title {
+      color: #2c3e50;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .about-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    .research-areas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .research-box {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .research-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .research-box .icon {
+      font-size: 3rem;
+      color: #3498db;
+      margin-bottom: 1rem;
+    }
+    
+    .research-box h4 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    
+    .highlight-box {
+      background: #f8f9fa;
+      border-left: 4px solid #3498db;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #3498db;
+      display: block;
+    }
+    
+    .stat-label {
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    .contact-info {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .contact-list li {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .contact-list li:last-child {
+      border-bottom: none;
+    }
+
+    .contact-name {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .contact-details {
+      color: #e74c3c;
+      text-decoration: none;
+      margin-right: 0.5rem;
+    }
+
+    .contact-details:hover {
+      color: #c0392b;
+      text-decoration: underline;
+    }
+
+    .career-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .career-intro {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item logo-item" href="index.html">
+          <img src="static/3DXlab.png" alt="3DXLab Logo" class="navbar-logo">
+        </a>
+      </div>
+
+      <div class="navbar-menu is-active">
+         <div class="navbar-start">
+           <a class="navbar-item nav-link" href="about.html">About Us</a>
+           <a class="navbar-item nav-link" href="team.html">Member</a>
+           <a class="navbar-item nav-link" href="achievements.html">Research</a>
+           <a class="navbar-item nav-link" href="about.html#join">Join</a>
+         </div>
+       </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="main-content">
+    <!-- 页面标题 -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">关于我们</h1>
+        <p class="page-subtitle">了解3DXLab的使命、愿景和研究方向</p>
+      </div>
+    </section>
+
+    <!-- 实验室介绍 -->
+    <section class="section content-section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-8 is-offset-2">
+            <div class="about-content">
+              <h2 class="title is-3 has-text-centered" style="color: #2c3e50;">实验室简介</h2>
+              <p>
+                欢迎来到湖南大学设计学院3DX实验室！我们是一个专注于前沿技术研究和创新的团队，
+                致力于在计算机视觉、3D重建、人工智能等领域推动学术研究和技术发展。
+              </p>
+              <p>
+                实验室由 <a href="https://design.hnu.edu.cn/info/1023/8820.htm" target="_blank" class="has-text-primary">劳奕臻教授</a> 
+                领导，汇聚了一批优秀的研究人员和学生，共同探索科技前沿，为社会发展贡献智慧和力量。
+              </p>
+              
+              <div class="highlight-box">
+                <h4 class="title is-4" style="color: #2c3e50;">我们的使命</h4>
+                <p>
+                  通过跨学科的研究方法，将计算机科学与设计艺术相结合，
+                  推动三维视觉技术在文化创意、工业设计、数字媒体等领域的创新应用，
+                  培养具有国际视野的复合型人才。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 研究方向 -->
+    <section class="section" style="background-color: #f8f9fa;">
+      <div class="container">
+        <h2 class="title is-2 section-title">研究方向</h2>
+        <div class="research-areas">
+          <div class="research-box">
+            <div class="icon">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h4 class="title is-4">计算机视觉</h4>
+            <p>深度学习、图像处理、目标检测与识别、视觉SLAM、神经辐射场等前沿技术研究</p>
+          </div>
+          <div class="research-box">
+            <div class="icon">
+              <i class="fas fa-cube"></i>
+            </div>
+            <h4 class="title is-4">3D重建技术</h4>
+            <p>三维建模、点云处理、多视图几何、实时重建、3D Gaussian Splatting等技术</p>
+          </div>
+          <div class="research-box">
+            <div class="icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h4 class="title is-4">人工智能</h4>
+            <p>机器学习、深度神经网络、智能算法、多模态学习、生成式AI</p>
+          </div>
+          <div class="research-box">
+            <div class="icon">
+              <i class="fas fa-vr-cardboard"></i>
+            </div>
+            <h4 class="title is-4">沉浸式技术</h4>
+            <p>VR/AR应用、人机交互、用户体验设计、沉浸式媒体制作</p>
+          </div>
+          <div class="research-box">
+            <div class="icon">
+              <i class="fas fa-landmark"></i>
+            </div>
+            <h4 class="title is-4">文化遗产数字化</h4>
+            <p>文物三维数字化、虚拟博物馆、文化传承技术、数字人文</p>
+          </div>
+          <div class="research-box">
+            <div class="icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4 class="title is-4">安全与对抗</h4>
+            <p>物理攻击、对抗样本、鲁棒性分析、安全防护技术</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 实验室数据 -->
+    <section class="section content-section">
+      <div class="container">
+        <h2 class="title is-2 section-title">实验室概况</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number">2020</span>
+            <div class="stat-label">成立年份</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <div class="stat-label">团队成员</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">20+</span>
+            <div class="stat-label">发表论文</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <div class="stat-label">研究项目</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 加入我们 -->
+    <section class="section" style="background-color: white;" id="join">
+      <div class="container">
+        <h2 class="title is-2 section-title">加入我们</h2>
+        
+        <div class="career-section">
+          <div class="career-intro">
+            我们实验室长期招收博士后、研究助理、全职/兼职博士生、实习生、研究科学家等职位。
+            有意向的同学可以通过以下邮箱联系我们：
+          </div>
+
+          <div class="contact-info">
+            <ul class="contact-list">
+              <li>
+                <span class="contact-name">
+                  <a href="mailto:yizhenlao@hnu.edu.cn" class="contact-details">yizhenlao@hnu.edu.cn</a>
+                  [ <span class="contact-name">劳奕臻教授</span> ]
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="recruitment-note">
+            <p style="margin-top: 2rem; color: #666; font-size: 1.1rem; line-height: 1.6;">
+              欢迎对计算机视觉、3D重建、人工智能或交互设计领域的研究感兴趣的同学（本科生、硕士生、博士生）加入我们的研究团队！<br>
+              专业背景包括但不限于：计算机科学、设计学、数学、自动化、电子工程等相关专业。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // 平滑滚动到锚点
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
